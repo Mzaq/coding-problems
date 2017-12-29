@@ -16,7 +16,7 @@ public class Interval {
 Also on Leetcode: https://leetcode.com/problems/meeting-rooms-ii/description/
 */
 
-//Naive solution
+//Naive solution - O(n^2)
 public int minMeetingRooms(Interval[] intervals) {
 	if (intervals == null || intervals.length == 0){
 		return 0;
@@ -41,3 +41,40 @@ public int minMeetingRooms(Interval[] intervals) {
 	return rooms;
 }
 
+//Heap solution - O(nlogn)
+public int minMeetingRooms(Interval[] intervals) {
+	if (intervals == null || intervals.length == 0){
+		return 0;
+	}
+	
+	Arrays.sort(intervals, new Comparator<Interval>(){
+		public int compare(Interval interval1, Interval interval2){
+			return interval1.start - interval2.start;
+		} 
+	});
+	
+	PriorityQueue<Interval> rooms = new PriorityQueue<Interval>(intervals.length, new Comparator<Interval>(){
+		public int compare(Interval interval1, Interval interval2){
+			return interval1.end - interval2.end;
+		}
+	});
+			
+	for (Interval interval : intervals){
+		if (rooms.size() == 0){
+			rooms.offer(interval);
+			continue;
+		}
+		
+		Interval priorityInterval = rooms.peek();
+		
+		if (interval.start < priorityInterval.end){
+			rooms.offer(interval);
+		} else {
+			priorityInterval = rooms.poll();
+			priorityInterval.end = interval.end;
+			rooms.offer(priorityInterval);
+		}
+	}
+	
+	return rooms.size();
+}
