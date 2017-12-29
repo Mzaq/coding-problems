@@ -78,3 +78,6 @@ public int minMeetingRooms(Interval[] intervals) {
 	
 	return rooms.size();
 }
+
+//Greedy Solution - O(nlogn)
+//Implement later
