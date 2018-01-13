@@ -9,7 +9,7 @@ For example, given the array ['G', 'B', 'R', 'R', 'B', 'R', 'G'], it should beco
 Also on LeetCode: https://leetcode.com/problems/sort-colors/description/
 */
 
-//brute force naive solution (not in-place)
+//O(n) brute force naive solution (not in-place)
 public void sortColors(int[] nums) {
 	int red = 0;
 	int white = 0;
@@ -37,3 +37,30 @@ public void sortColors(int[] nums) {
 		blue--;
 	}
 }
+
+//O(4n) Counting Sort implementation (not in-place). Works for any number of colors,
+//but not as efficient as brute force for 3 colors.
+public void sortColors(int[] nums) {
+	//Count size equal to number of possible colors
+	int[] count = new int[3];
+	int[] output = new int[nums.length];
+	
+	for (int i = 0; i < nums.length; i++){
+		count[nums[i]]++;    
+	}
+	
+	for (int i = 1; i < count.length; i++){
+		count[i] += count[i-1];
+	}
+	
+	for (int i = 0; i < nums.length; i++){
+		output[count[nums[i]] - 1] = nums[i];
+		count[nums[i]]--;
+	}
+	
+	for (int i = 0; i < nums.length; i++){
+		nums[i] = output[i];
+	}
+}
+
+//Implement one-pass linear solution w/ constant space
