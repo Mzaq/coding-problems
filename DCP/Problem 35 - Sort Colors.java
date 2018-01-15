@@ -63,4 +63,24 @@ public void sortColors(int[] nums) {
 	}
 }
 
-//Implement one-pass linear solution w/ constant space
+//One-pass linear solution w/ constant space
+public void sortColors(int[] nums) {
+	int left = 0;
+	int right = nums.length - 1;
+	int count = 0;
+	
+	while (count <= right){
+		if (nums[count] == 0){
+			nums[count] = nums[left];
+			nums[left] = 0;
+			left++;
+		}
+		if (nums[count] == 2){
+			nums[count] = nums[right];
+			nums[right] = 2;
+			right--;
+			count--;
+		}
+		count++;
+	}
+}
