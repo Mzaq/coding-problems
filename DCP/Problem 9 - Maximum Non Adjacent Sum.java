@@ -16,13 +16,9 @@ Also on LeetCode:
 //O(n) time complexity
 //O(n) space complexity
 public int maxSumNonAdjacent(int[] nums) {
-        if(nums == null || nums.length == 0){
-            return 0;
-        }
+        if(nums == null || nums.length == 0) return 0;
         
-        if (nums.length == 1){
-            return nums[0];
-        }
+        if (nums.length == 1) return nums[0];
             
         int[] maxSum = new int[nums.length + 1];
         maxSum[0] = 0;
@@ -31,12 +27,9 @@ public int maxSumNonAdjacent(int[] nums) {
         
         for (int i = 2; i < nums.length; i++){
             int add = Math.max(maxSum[i - 1], maxSum[i - 2]) == maxSum[i - 1] ? i - 1: i - 2; 
-            if (nums[i] > 0){
-                maxSum[i + 1] += nums[i] + maxSum[add];
-            } else {
-                maxSum[i + 1] = maxSum[add];
-            }
+            maxSum[i + 1] = Math.max(nums[i] + maxSum[add], maxSum[add]);
         }
         
         return Math.max(maxSum[nums.length], maxSum[nums.length - 1]);
+    }
 }
