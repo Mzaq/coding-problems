@@ -16,7 +16,7 @@ Also on LeetCode:
 //O(n) time complexity
 //O(n) space complexity
 public int maxSumNonAdjacent(int[] nums) {
-        if(nums == null || nums.length == 0) return 0;
+        if (nums == null || nums.length == 0) return 0;
         
         if (nums.length == 1) return nums[0];
             
