@@ -12,6 +12,8 @@ For example, given array = [10, 5, 2, 7, 8, 7] and k = 3, we should get: [10, 7,
 8 = max(7, 8, 7)
 Do this in O(n) time
 
+Also on LeetCode: https://leetcode.com/problems/sliding-window-maximum/description/
+
 */
 
 //O(n) time solution with Deque
