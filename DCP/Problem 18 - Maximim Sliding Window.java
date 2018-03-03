@@ -10,12 +10,11 @@ For example, given array = [10, 5, 2, 7, 8, 7] and k = 3, we should get: [10, 7,
 7 = max(5, 2, 7)
 8 = max(2, 7, 8)
 8 = max(7, 8, 7)
-Do this in O(n) time and O(k) space. You can modify the input array in-place and you do not need to store the results. You can simply print them out as you compute them.
+Do this in O(n) time
 
 */
 
-//Initial solution (INCOMPLETE)
-
+//O(n) time solution with Deque
 public int[] maxSlidingWindow(int[] nums, int k) {
 	if (nums == null || nums.length == 0){ 
 		return new int[]{};
@@ -35,17 +34,15 @@ public int[] maxSlidingWindow(int[] nums, int k) {
 	
 	maxVals.add(max);
 	
-	while (index < nums.length - k){
+	while (index < nums.length){
 		int first = queue.removeFirst();
 		int currentMax = maxVals.get(maxVals.size() - 1);
-		index++;
+		queue.addLast(nums[index]);
 		
 		if (first < currentMax){
 			if (nums[index] > currentMax) maxVals.add(nums[index]);
 			else maxVals.add(currentMax);
-		} else {
-			queue.addLast(nums[index]);
-			
+		} else {                
 			int windowMax = Integer.MIN_VALUE;
 			for (int num : queue){
 				if (num > windowMax) windowMax = num;
@@ -53,7 +50,8 @@ public int[] maxSlidingWindow(int[] nums, int k) {
 			
 			maxVals.add(windowMax);
 		}
+		index++;
 	}
 	
-	return maxVals.toArray(new int[maxVals.size()]);
+	return maxVals.stream().mapToInt(i->i).toArray();
 }
