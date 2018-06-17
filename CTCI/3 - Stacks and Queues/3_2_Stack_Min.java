@@ -4,8 +4,6 @@
  * which returns the minimum element? Push, pop and min should all operate in 0(1) time
 */
 
-
-
 public E MinStack { 
 	private static final int MAX_SIZE = 100;
 	private int count = 0;
@@ -38,5 +36,4 @@ public E MinStack {
 		if (count == 0) throw new EmptyStackException();
 		return min[count - 1];;
 	}
-
 }
