@@ -21,3 +21,23 @@ public boolean findRoute(Node start, Node end){
 	
 	return false;
 }
+
+
+//Recursive solution (untested)
+public boolean checkRoute(GraphNode source, GraphNode target) {
+	if (source.equals(target)) return true;
+	Set<GraphNode> visited = new HashSet<>();
+	
+	return checkRoute(source, target, visited);
+}
+
+private boolean checkRoute(GraphNode source, GraphNode target, Set<GraphNode> visited) {
+	if (!visited.add(source)) return false;
+	if (source.equals(target)) return true;
+	
+	for (GraphNode child : source.children) {
+		checkRoute(child, target, visited);
+	}
+	
+	return false;
+}
