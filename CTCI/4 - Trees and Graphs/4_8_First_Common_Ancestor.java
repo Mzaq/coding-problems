@@ -48,3 +48,14 @@ private TreeNode findLCA (Deque<TreeNode> stack1, Deque<TreeNode> stack2) {
 	
 	return curr1;
 }
+
+//BST version second attempt
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+	TreeNode current = root;
+	while ((p.val < current.val && q.val < current.val) || (p.val > current.val && q.val > current.val)) {
+		if (p.val < current.val && q.val < current.val) current = current.left;
+		else current = current.right;
+	}
+	
+	return current;
+}
