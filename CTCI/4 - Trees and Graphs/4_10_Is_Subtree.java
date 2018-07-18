@@ -9,7 +9,7 @@ That is, if you cut off the tree at node n, the two trees would be identical
 Also on LeetCode: https://leetcode.com/problems/subtree-of-another-tree/description/
 */
 
-//Recursive solution O(n logn) ?
+//Recursive solution O(n log`n) ?
 public boolean isSubtree(TreeNode s, TreeNode t) {
 	if (s == null && t == null) return true; 
 	if (s == null || t == null) return false;
