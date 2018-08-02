@@ -29,4 +29,18 @@ public int magicIndex(int[] numbers, int start, int end) {
 	}
 }
 
-//TODO: do follow up
+//NOT distinct values
+public int magicIndexNotDistinct(int[] numbers, int start, int end) {
+	if (start < 0 || end < 0 || start >= numbers.length || end >= numbers.length) {
+		return -1;
+	}
+	int middle = start + (end - start)/2;
+	if (numbers[middle] == middle) return middle;
+	if (start == end) return -1;
+
+	int left = magicIndexNotDistinct(numbers, start, Math.min(middle - 1, numbers[middle]));
+	if (left != -1) return left;
+
+	int right = magicIndexNotDistinct(numbers, Math.max(middle + 1, numbers[middle]), end);
+	return right;
+}
